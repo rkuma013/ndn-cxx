@@ -22,8 +22,10 @@
 #ifndef NDN_MGMT_NFD_FACE_STATUS_HPP
 #define NDN_MGMT_NFD_FACE_STATUS_HPP
 
+// change
 #include "face-traits.hpp"
 #include "../../util/time.hpp"
+/////
 
 namespace ndn {
 namespace nfd {
@@ -218,6 +220,98 @@ public: // getters & setters
   FaceStatus&
   setNOutBytes(uint64_t nOutBytes);
 
+
+  uint64_t
+  getNFragmentationErrors() const
+  {
+    return m_nFragmentationErrors;
+  }
+
+  FaceStatus&
+  setNFragmentationErrors(uint64_t nFragmentationErrors);
+
+  uint64_t
+  getNOutOverMtu() const
+  {
+    return m_nOutOverMtu;
+  }
+
+  FaceStatus&
+  setNOutOverMtu(uint64_t nOutOverMtu);
+
+uint64_t
+  getNInLpInvalid() const
+  {
+    return m_nInLpInvalid;
+  }
+
+  FaceStatus&
+  setNInLpInvalid(uint64_t nInLpInvalid);
+
+//
+uint64_t
+  getNReassemblyTimeouts() const
+  {
+    return m_nReassemblyTimeouts;
+  }
+
+  FaceStatus&
+  setNReassemblyTimeouts(uint64_t nReassemblyTimeouts);
+
+//
+uint64_t
+  getNInNetInvalid() const
+  {
+    return m_nInNetInvalid;
+  }
+
+  FaceStatus&
+  setNInNetInvalid(uint64_t nInNetInvalid);
+  
+//
+uint64_t
+  getNAcknowledged() const
+  {
+    return m_nAcknowledged;
+  }
+
+  FaceStatus&
+  setNAcknowledged(uint64_t nAcknowledged);  
+
+//
+uint64_t
+  getNRetransmitted() const
+  {
+    return m_nRetransmitted;
+  }
+
+  FaceStatus&
+  setNRetransmitted(uint64_t nRetransmitted);
+
+
+ 
+//
+uint64_t
+  getNRetxExhausted() const
+  {
+    return m_nRetxExhausted;
+  }
+
+  FaceStatus&
+  setNRetxExhausted(uint64_t nRetxExhausted);
+  
+ //
+uint64_t
+  getNCongestionMarked() const
+  {
+    return m_nCongestionMarked;
+  }
+
+  FaceStatus&
+  setNCongestionMarked(uint64_t nCongestionMarked);
+   
+   
+  
 private:
   optional<time::milliseconds> m_expirationPeriod;
   optional<time::nanoseconds> m_baseCongestionMarkingInterval;
@@ -231,6 +325,20 @@ private:
   uint64_t m_nOutNacks;
   uint64_t m_nInBytes;
   uint64_t m_nOutBytes;
+  
+  //////////////// change
+  uint64_t m_nFragmentationErrors;
+  uint64_t m_nOutOverMtu;
+  uint64_t m_nInLpInvalid;
+  uint64_t m_nReassemblyTimeouts;
+  uint64_t m_nInNetInvalid;
+  uint64_t m_nAcknowledged;
+  uint64_t m_nRetransmitted;
+  uint64_t m_nRetxExhausted;
+  uint64_t m_nCongestionMarked;
+  
+  
+  
 };
 
 NDN_CXX_DECLARE_WIRE_ENCODE_INSTANTIATIONS(FaceStatus);
