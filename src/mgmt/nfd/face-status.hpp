@@ -24,7 +24,7 @@
 
 // change
 #include "face-traits.hpp"
-#include "../../util/time.hpp"
+#include "util/time.hpp"
 /////
 
 namespace ndn {
