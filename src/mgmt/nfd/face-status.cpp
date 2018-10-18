@@ -42,16 +42,15 @@ FaceStatus::FaceStatus()
   , m_nOutNacks(0)
   , m_nInBytes(0)
   , m_nOutBytes(0)
-  // change
-  ,m_nFragmentationErrors(0)
-  ,m_nOutOverMtu(0)
-  ,m_nInLpInvalid(0)
-  ,m_nReassemblyTimeouts(0)
-  ,m_nInNetInvalid(0)
-  ,m_nAcknowledged(0)
-  ,m_nRetransmitted(0)
-  ,m_nRetxExhausted(0)
-  ,m_nCongestionMarked(0)
+  , m_nFragmentationErrors(0)
+  , m_nOutOverMtu(0)
+  , m_nInLpInvalid(0)
+  , m_nReassemblyTimeouts(0)
+  , m_nInNetInvalid(0)
+  , m_nAcknowledged(0)
+  , m_nRetransmitted(0)
+  , m_nRetxExhausted(0)
+  , m_nCongestionMarked(0)
   
 {
 }
@@ -76,19 +75,15 @@ FaceStatus::wireEncode(EncodingImpl<TAG>& encoder) const
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInNacks, m_nInNacks);
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInData, m_nInData);
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInInterests, m_nInInterests);
-  // change
-  
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NFragmentationErrors, m_nFragmentationErrors);
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NOutOverMtu, m_nOutOverMtu);
   totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInLpInvalid, m_nInLpInvalid);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NReassemblyTimeouts, m_nReassemblyTimeouts);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInNetInvalid, m_nInNetInvalid);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NAcknowledged, m_nAcknowledged);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NRetransmitted, m_nRetransmitted);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NRetxExhausted, m_nRetxExhausted);
-totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NCongestionMarked, m_nCongestionMarked);
-//////////////////
-  
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NReassemblyTimeouts, m_nReassemblyTimeouts);
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NInNetInvalid, m_nInNetInvalid);
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NAcknowledged, m_nAcknowledged);
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NRetransmitted, m_nRetransmitted);
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NRetxExhausted, m_nRetxExhausted);
+  totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NCongestionMarked, m_nCongestionMarked);
   if (m_mtu) {
     totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::Mtu, *m_mtu);
   }
@@ -113,8 +108,6 @@ totalLength += prependNonNegativeIntegerBlock(encoder, tlv::nfd::NCongestionMark
 
   totalLength += encoder.prependVarNumber(totalLength);
   totalLength += encoder.prependVarNumber(tlv::nfd::FaceStatus);
-  
-  
   return totalLength;
 }
 
@@ -298,7 +291,7 @@ FaceStatus::wireDecode(const Block& block)
     BOOST_THROW_EXCEPTION(Error("missing required Flags field"));
   }
   
-  //////////////////////// change
+  // Export GenericLinkService
   if (val != m_wire.elements_end() && val->type() == tlv::nfd::NFragmentationErrors) {
     m_nFragmentationErrors = readNonNegativeInteger(*val);
     ++val;
@@ -369,10 +362,7 @@ FaceStatus::wireDecode(const Block& block)
   }
   else {
     BOOST_THROW_EXCEPTION(Error("missing required m_nCongestionMarked field"));
-  }
-  
-  //////////
-  
+  }    
 }
 
 FaceStatus&
@@ -503,8 +493,7 @@ FaceStatus::setNOutBytes(uint64_t nOutBytes)
   return *this;
 }
 
-// change
-
+// Export GenericLinkService
 FaceStatus&
 FaceStatus::setNFragmentationErrors(uint64_t nFragmentationErrors)
 {
@@ -537,7 +526,6 @@ FaceStatus::setNReassemblyTimeouts(uint64_t nReassemblyTimeouts)
   return *this;
 }
 
-
 FaceStatus&
 FaceStatus::setNInNetInvalid(uint64_t nInNetInvalid)
    {
@@ -545,8 +533,7 @@ FaceStatus::setNInNetInvalid(uint64_t nInNetInvalid)
   m_nInNetInvalid = nInNetInvalid;
   return *this;
 }
-
-  
+ 
 FaceStatus&
 FaceStatus::setNAcknowledged(uint64_t nAcknowledged)
   {
@@ -554,7 +541,6 @@ FaceStatus::setNAcknowledged(uint64_t nAcknowledged)
   m_nAcknowledged = nAcknowledged;
   return *this;
 }
-
 
 FaceStatus&
 FaceStatus::setNRetransmitted(uint64_t nRetransmitted)
@@ -564,9 +550,6 @@ FaceStatus::setNRetransmitted(uint64_t nRetransmitted)
   return *this;
 }
 
-
-
-
 FaceStatus&
 FaceStatus::setNRetxExhausted(uint64_t nRetxExhausted)
   {
@@ -575,8 +558,6 @@ FaceStatus::setNRetxExhausted(uint64_t nRetxExhausted)
   return *this;
 }
 
-  
-  
 FaceStatus&
 FaceStatus::setNCongestionMarked(uint64_t nCongestionMarked)
   {
@@ -584,10 +565,6 @@ FaceStatus::setNCongestionMarked(uint64_t nCongestionMarked)
   m_nCongestionMarked = nCongestionMarked;
   return *this;
 }
-
-  
-  
-////////
 
 bool
 operator==(const FaceStatus& a, const FaceStatus& b)
@@ -617,19 +594,15 @@ operator==(const FaceStatus& a, const FaceStatus& b)
       a.getNOutNacks() == b.getNOutNacks() &&
       a.getNInBytes() == b.getNInBytes() &&
       a.getNOutBytes() == b.getNOutBytes() &&
-      // change
       a.getNFragmentationErrors()==b.getNFragmentationErrors() &&
       a.getNOutOverMtu()==b.getNOutOverMtu() &&
       a.getNInLpInvalid()==b.getNInLpInvalid() &&
       a.getNReassemblyTimeouts()==b.getNReassemblyTimeouts() &&
       a.getNInNetInvalid()==b.getNInNetInvalid() &&
       a.getNAcknowledged()==b.getNAcknowledged() &&
-	  a.getNRetransmitted()==b.getNRetransmitted() &&
-	  a.getNRetxExhausted()==b.getNRetxExhausted() &&
-	  a.getNCongestionMarked()==b.getNCongestionMarked();
-      
-      
-      
+      a.getNRetransmitted()==b.getNRetransmitted() &&
+      a.getNRetxExhausted()==b.getNRetxExhausted() &&
+      a.getNCongestionMarked()==b.getNCongestionMarked();
 }
 
 std::ostream&
@@ -672,17 +645,16 @@ operator<<(std::ostream& os, const FaceStatus& status)
      << "                bytes: {in: " << status.getNInBytes() << ", "
      << "out: " << status.getNOutBytes() << "}}\n"
      <<"\nGeneric::{{"
-	 << "\n	getNFragmentationErrors(): " << status.getNFragmentationErrors() 
-	 << "\n	getNOutOverMtu(): " << status.getNOutOverMtu()
-	 << "\n	getNInLpInvalid(): " << status.getNInLpInvalid() 
-	 << "\n getNReassemblyTimeouts: " << status.getNReassemblyTimeouts() 
-	 << "\n getNAcknowledged:: " << status.getNAcknowledged() 
-	 << "\n getNAcknowledged:: " << status.getNAcknowledged() 
-	 << "\n getNRetransmitted:" << status.getNRetransmitted() 
-	 << "\n getNRetxExhausted:: " << status.getNRetxExhausted() 
-	 << "\n getNCongestionMarked:: " << status.getNCongestionMarked() 
-	 << "}}\n";
-     ///
+     << "\n getNFragmentationErrors(): " << status.getNFragmentationErrors() 
+     << "\n getNOutOverMtu(): " << status.getNOutOverMtu()
+     << "\n getNInLpInvalid(): " << status.getNInLpInvalid() 
+     << "\n getNReassemblyTimeouts: " << status.getNReassemblyTimeouts() 
+     << "\n getNAcknowledged:: " << status.getNAcknowledged() 
+     << "\n getNAcknowledged:: " << status.getNAcknowledged() 
+     << "\n getNRetransmitted:" << status.getNRetransmitted() 
+     << "\n getNRetxExhausted:: " << status.getNRetxExhausted() 
+     << "\n getNCongestionMarked:: " << status.getNCongestionMarked() 
+     << "}}\n";
 
   return os << "     )";
 }

@@ -22,10 +22,8 @@
 #ifndef NDN_MGMT_NFD_FACE_STATUS_HPP
 #define NDN_MGMT_NFD_FACE_STATUS_HPP
 
-// change
 #include "face-traits.hpp"
-#include "util/time.hpp"
-/////
+#include "../../util/time.hpp"
 
 namespace ndn {
 namespace nfd {
@@ -248,7 +246,6 @@ uint64_t
   FaceStatus&
   setNInLpInvalid(uint64_t nInLpInvalid);
 
-//
 uint64_t
   getNReassemblyTimeouts() const
   {
@@ -258,7 +255,6 @@ uint64_t
   FaceStatus&
   setNReassemblyTimeouts(uint64_t nReassemblyTimeouts);
 
-//
 uint64_t
   getNInNetInvalid() const
   {
@@ -268,7 +264,6 @@ uint64_t
   FaceStatus&
   setNInNetInvalid(uint64_t nInNetInvalid);
   
-//
 uint64_t
   getNAcknowledged() const
   {
@@ -278,7 +273,6 @@ uint64_t
   FaceStatus&
   setNAcknowledged(uint64_t nAcknowledged);  
 
-//
 uint64_t
   getNRetransmitted() const
   {
@@ -288,9 +282,6 @@ uint64_t
   FaceStatus&
   setNRetransmitted(uint64_t nRetransmitted);
 
-
- 
-//
 uint64_t
   getNRetxExhausted() const
   {
@@ -300,7 +291,6 @@ uint64_t
   FaceStatus&
   setNRetxExhausted(uint64_t nRetxExhausted);
   
- //
 uint64_t
   getNCongestionMarked() const
   {
@@ -309,8 +299,6 @@ uint64_t
 
   FaceStatus&
   setNCongestionMarked(uint64_t nCongestionMarked);
-   
-   
   
 private:
   optional<time::milliseconds> m_expirationPeriod;
@@ -325,8 +313,6 @@ private:
   uint64_t m_nOutNacks;
   uint64_t m_nInBytes;
   uint64_t m_nOutBytes;
-  
-  //////////////// change
   uint64_t m_nFragmentationErrors;
   uint64_t m_nOutOverMtu;
   uint64_t m_nInLpInvalid;
@@ -336,9 +322,6 @@ private:
   uint64_t m_nRetransmitted;
   uint64_t m_nRetxExhausted;
   uint64_t m_nCongestionMarked;
-  
-  
-  
 };
 
 NDN_CXX_DECLARE_WIRE_ENCODE_INSTANTIATIONS(FaceStatus);
