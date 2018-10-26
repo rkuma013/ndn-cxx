@@ -84,6 +84,16 @@ enum {
   NInBytes      = 148,
   NOutBytes     = 149,
 
+  NFragmentationErrors = 200,
+  NOutOverMtu = 201,
+  NInLpInvalid = 202,
+  NReassemblyTimeouts = 203,
+  NInNetInvalid = 204,
+  NAcknowledged = 205,
+  NRetransmitted= 206,
+  NRetxExhausted = 207,
+  NCongestionMarked = 208,
+
   // Content Store Management
   CsInfo  = 128,
   NHits   = 129,

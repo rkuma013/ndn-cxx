@@ -21,11 +21,11 @@
 
 #include "face-status.hpp"
 // change
-#include "encoding/block-helpers.hpp"
-#include "encoding/encoding-buffer.hpp"
-#include "encoding/tlv-nfd.hpp"
-#include "util/concepts.hpp"
-#include "util/string-helper.hpp"
+#include "../../encoding/block-helpers.hpp"
+#include "../../encoding/encoding-buffer.hpp"
+#include "../../encoding/tlv-nfd.hpp"
+#include "../../util/concepts.hpp"
+#include "../../util/string-helper.hpp"
 //
 
 namespace ndn {
