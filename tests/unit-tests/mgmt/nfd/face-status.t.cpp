@@ -54,7 +54,16 @@ makeFaceStatus()
       .setNOutNacks(2)
       .setNInBytes(1329719163)
       .setNOutBytes(999110448)
-      .setFlags(0x7);
+      .setFlags(0x7)
+      .setNFragmentationErrors(1)
+      .setNOutOverMtu(1)
+      .setNInLpInvalid()1)
+      .setNReassemblyTimeouts(1)
+      .setNInNetInvalid(1)
+      .setNAcknowledged(1)
+      .setNRetransmitted(1)
+      .setNRetxExhausted(1)
+      .setNCongestionMarked(1);
 }
 
 BOOST_AUTO_TEST_CASE(Encode)
@@ -115,6 +124,15 @@ BOOST_AUTO_TEST_CASE(Print)
                     "                Data: {in: 0, out: 0},\n"
                     "                Nacks: {in: 0, out: 0},\n"
                     "                bytes: {in: 0, out: 0}}\n"
+                    "     getNFragmentationErrors: 0,\n"
+                    "     getNOutOverMtu: 0,\n"
+                    "     getNInLpInvalid: 0,\n"
+                    "     getNReassemblyTimeouts: 0,\n"
+                    "     getNInNetInvalid: 0,\n"
+                    "     getNAcknowledged: 0,\n"
+                    "     getNRetransmitted: 0,\n"
+                    "     getNRetxExhausted: 0,\n"
+                    "     getNCongestionMarked: 0\n"
                     "     )");
 
   status = makeFaceStatus();
@@ -134,6 +152,15 @@ BOOST_AUTO_TEST_CASE(Print)
                     "                Data: {in: 200, out: 4},\n"
                     "                Nacks: {in: 1, out: 2},\n"
                     "                bytes: {in: 1329719163, out: 999110448}}\n"
+                    "     getNFragmentationErrors: 1,\n"
+                    "     getNOutOverMtu: 1,\n"
+                    "     getNInLpInvalid: 1,\n"
+                    "     getNReassemblyTimeouts: 1,\n"
+                    "     getNInNetInvalid: 1,\n"
+                    "     getNAcknowledged: 1,\n"
+                    "     getNRetransmitted: 1,\n"
+                    "     getNRetxExhausted: 1,\n"
+                    "     getNCongestionMarked: 1\n"
                     "     )");
 }
 

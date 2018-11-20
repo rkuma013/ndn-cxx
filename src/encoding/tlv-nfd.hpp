@@ -86,6 +86,17 @@ enum {
   NSatisfiedInterests   = 153,
   NUnsatisfiedInterests = 154,
 
+  // GenericLinkService counters
+  NFragmentationErrors = 200,
+  NOutOverMtu = 201,
+  NInLpInvalid = 202,
+  NReassemblyTimeouts = 203,
+  NInNetInvalid = 204,
+  NAcknowledged = 205,
+  NRetransmitted= 206,
+  NRetxExhausted = 207,
+  NCongestionMarked = 208,
+
   // Content Store Management
   CsInfo  = 128,
   NHits   = 129,
